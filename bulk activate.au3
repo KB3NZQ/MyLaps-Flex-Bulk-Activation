@@ -15,10 +15,10 @@ Local $term = 0
 While 1
 	WinWaitActive ( "Registration" ) ;Wait till window opens
 		ControlFocus ( "Registration","",1044) ; select first name
-			Send ( "Scott" ) ;Text box = First name
+			Send ( "First Name" ) ;Text box = First name
 			Send ( "{Tab}" ) ; tab to last name
 		;ControlFocus ( "Registration","",1045) ;select last name
-			Send ( "Roskovski" ) ;Text Box = Last Name
+			Send ( "Last Name" ) ;Text Box = Last Name
 		;ControlFocus ( "Registration" ,"",1052) ;select email
 			Send ( "{Tab}" ) ;tab to email
 			Send ( "put your email address here" );Text box for your email address that you used when you registred the transponder to your account
