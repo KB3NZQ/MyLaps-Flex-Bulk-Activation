@@ -8,7 +8,36 @@ Press the ESC key to stop the script or it will keep running untill you restart 
 #comments-end
 
 ; Set Hot key to ESC to Kill the Script when we are done activating Transponders
-HotKeySet("{ESC}", "die")
+;HotKeySet("{{ESC}"["die"])
+#include <MsgBoxConstants.au3>
+
+; Press Esc to terminate script, Pause/Break to "pause"
+
+Global $g_bPaused = False
+
+;HotKeySet("{PAUSE}", "TogglePause")
+HotKeySet("{ESC}", "Terminate")
+HotKeySet("+!d", "ShowMessage") ; Shift-Alt-d
+
+;While 1
+ ;       Sleep(100)
+;WEnd
+
+Func TogglePause()
+        $g_bPaused = Not $g_bPaused
+        While $g_bPaused
+                Sleep(100)
+                ToolTip('Script is "Paused"', 0, 0)
+        WEnd
+        ToolTip("")
+EndFunc   ;==>TogglePause
+
+
+
+Func ShowMessage()
+        MsgBox($MB_SYSTEMMODAL, "", "This is a message.")
+EndFunc   ;==>ShowMessage
+
 
 
 Local $term = 0
@@ -28,14 +57,17 @@ Local $term = 0
 	WinWaitClose ( "Registration" ) ;wait for window to close then go back wait till window opens
 		Sleep(50) ;Slows down the script so it doesn't use too much CPU time
 WEnd
-#comments-end
+#comments-end   While 1
 While 1
-	WinActivate ( "FLEX Manager" )
-ControlClick ( "ACTIVATE", "ACTIVATE", "1000"[, button= "left"[, clicks = 1 [, 76[, 13 ]]])
-Sleep(50)
+	WinActivate("FLEX Manager")
+	ControlClick("FLEX Manager","", "[ID:1000]")
+	Sleep(20000)
 
 WEnd
 
-Func die() ;Die
-    Exit 0 ;It's dead Jim... But it died with out any errors
-EndFunc
+Func Terminate()
+        Exit
+EndFunc   ;==>Terminate
+;Func die() ;Die
+ ;	Exit ;It's dead Jim... But it died with out any errors
+;EndFunc   ;==>die
