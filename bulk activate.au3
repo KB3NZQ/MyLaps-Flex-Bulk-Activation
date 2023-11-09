@@ -8,11 +8,11 @@ Press the ESC key to stop the script or it will keep running untill you restart 
 #comments-end
 
 ; Set Hot key to ESC to Kill the Script when we are done activating Transponders
-HotKeySet("{ESC}", "Terminate")
+HotKeySet("{ESC}", "die")
 
 
 Local $term = 0
-While 1
+#comments-start While 1
 	WinWaitActive ( "Registration" ) ;Wait till window opens
 		ControlFocus ( "Registration","",1044) ; select first name
 			Send ( "First Name" ) ;Text box = First name
@@ -28,7 +28,14 @@ While 1
 	WinWaitClose ( "Registration" ) ;wait for window to close then go back wait till window opens
 		Sleep(50) ;Slows down the script so it doesn't use too much CPU time
 WEnd
+#comments-end
+While 1
+	WinActivate ( "FLEX Manager" )
+ControlClick ( "ACTIVATE", "ACTIVATE", "1000"[, button= "left"[, clicks = 1 [, 76[, 13 ]]])
+Sleep(50)
 
-Func Terminate() ;Die
+WEnd
+
+Func die() ;Die
     Exit 0 ;It's dead Jim... But it died with out any errors
 EndFunc
